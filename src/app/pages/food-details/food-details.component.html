@@ -1,0 +1,71 @@
+<app-section-header title="Details"></app-section-header>
+
+<form [formGroup]="form">
+    <div class="row justify-content-start align-items-center">
+        <div class="col d-flex flex-column">
+            <app-form-field [field]="controls[0]"></app-form-field>
+            <app-form-field [field]="controls[1]"></app-form-field>
+            <app-form-field [field]="controls[2]"></app-form-field>
+            <app-form-field [field]="controls[3]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-pie-graph [data]="f.chart"></app-pie-graph>
+        </div>
+    </div>
+
+    <div class="row justify-content-start align-items-center">
+        <div class="col">
+            <app-form-field [field]="controls[4]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[5]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[6]"></app-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-start align-items-center">
+        <div class="col">
+            <app-form-field [field]="controls[7]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[8]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[9]"></app-form-field>
+        </div>
+    </div>
+</form>
+
+
+
+<!-- <div class="mb-1"
+        *ngFor="let control of controls">
+        <app-form-field [field]="control"></app-form-field>
+    </div> -->
+
+
+<hr class="mb-3">
+
+<div class="d-flex justify-content-end align-items-center g-3">
+    <div class="col-auto"
+        *ngIf="_data.food.id != 'Create'">
+        <a mat-stroked-button
+            color="warn"
+            (click)="openDeleteDialog()"
+            class="px-3 p-1">
+            <label class="mat-button">Delete</label>
+        </a>
+    </div>
+
+    <div class="col-auto ms-3">
+        <a mat-raised-button
+            color="accent"
+            (click)="save()"
+            class="px-3 p-1">
+            <label class="mat-button">Save</label>
+        </a>
+    </div>
+
+</div>

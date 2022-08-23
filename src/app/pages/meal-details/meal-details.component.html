@@ -1,0 +1,51 @@
+<app-section-header title="Details"></app-section-header>
+
+<form [formGroup]="form">
+    <div class="mb-1"
+        *ngFor="let control of controls">
+        <app-form-field [field]="control"></app-form-field>
+    </div>
+</form>
+
+
+<app-section-header title="Parts" [buttons]="partButtons" (event)="partHeaderEvent($event)"></app-section-header>
+
+<div *ngIf="_data.meal.parts.length > 0; else empty">
+    <div *ngFor="let part of _data.meal.parts" >
+        <app-meal-part-list-item [part]="part" (event)="partListEvent($event)"></app-meal-part-list-item>
+    </div>
+</div>
+
+
+
+<hr>
+
+<div class="row justify-content-end align-items-center g-3">
+    <div class="col-auto" *ngIf="_data.meal.id != 'Create'">
+        <a mat-stroked-button
+            color="warn"
+            (click)="openDeleteDialog()"
+            class="px-3 p-1">
+            <label class="mat-button">Delete</label>
+        </a>
+    </div>
+
+    <div class="col-auto ms-3">
+        <a mat-raised-button
+            color="accent"
+            (click)="save()"
+            class="px-3 p-1">
+            <label class="mat-button">Save</label>
+        </a>
+    </div>
+
+</div>
+
+
+<ng-template #empty>
+    <div class="alert alert-danger mb-0">
+        <div class="alert-text">
+            <label class="mat-caption">Nothing found</label>
+        </div>
+    </div> 
+</ng-template>

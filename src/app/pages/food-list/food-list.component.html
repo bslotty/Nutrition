@@ -1,0 +1,243 @@
+<app-section-header [title]="title"
+  [buttons]="headerButtons"
+  (event)="headerEvent($event)"></app-section-header>
+
+
+<!-- <app-list [list]="_data._http.getFoods()"
+  [columns]="visibleColumns"
+  [actions]="listButtons"
+  (event)="listEvent($event)"></app-list> -->
+
+
+<div class="row g-3 justify-content-center align-items-center">
+  <div class="col">
+    <form [formGroup]="form">
+      <mat-form-field>
+        <input matInput
+          type="text"
+          formControlName="term"
+          placeholder="Filter">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="col-auto">
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"
+      showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+
+<div class="d-flex">
+  <table mat-table
+    matSort
+    [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <a mat-icon-button
+          color="primary"
+          routerLink="/life/foods/{{ row.id }}">
+          <span class="icon-link-2"></span>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="col">
+        <label class="mat-body-1"> Name </label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col ">
+        <div class="d-flex flex-column justify-content-start align-items-start">
+          <label class="subText mat-caption">{{ row.brand }}</label>
+          <label class="mat-body-1">{{ row.name }}</label>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="servingSize">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header> Serving Size </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.servingSize }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="protein">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="col-1 d-none d-lg-flex">
+        <label class="protein mat-body-1">P</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="protein mat-body-1">
+          {{ row.protein }}
+        </label>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="fat">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="fat col-1 d-none d-lg-flex">
+        <label class="fat mat-body-1">F</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="fat mat-body-1">
+          {{ row.fat }}
+        </label>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="carbs">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="carbs col-1 d-none d-lg-flex">
+        <label class="carbs mat-body-1">C</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="carbs mat-body-1">
+          {{ row.carbs }}
+        </label>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="netCarbs">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="carbs col-1 d-none d-lg-flex">
+        <label class="carbs mat-body-1">nC</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="carbs mat-body-1">
+          {{ row.netCarbs }}
+        </label>
+
+      </mat-cell>
+    </ng-container>
+
+
+
+
+    <ng-container matColumnDef="sodium">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="col-1 d-none d-lg-flex">
+        <label class="sodium mat-body-1">So</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="sodium mat-body-1">
+          {{ row.sodium }}
+        </label>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="fiber">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="col-1 d-none d-lg-flex">
+        <label class="fiber mat-body-1">Fi</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="fiber mat-body-1">
+          {{ row.fiber}}
+        </label>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="sugar">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header
+        class="col-1 d-none d-lg-flex">
+        <label class="sugar mat-body-1">Su</label>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-1 d-none d-lg-flex">
+        <label class="sugar mat-body-1">
+          {{ row.sugar }}
+        </label>
+      </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="pie">
+      <mat-header-cell *matHeaderCellDef
+        class="col-1"> </mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        class="col-auto">
+        <app-pie-graph [data]="row?.chart"
+          size="small"></app-pie-graph>
+      </mat-cell>
+
+    </ng-container>
+
+
+    <ng-component matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef
+        class="col-1"></mat-header-cell>
+
+      <mat-cell *matCellDef="let row"
+        class="col-auto">
+        <a mat-mini-fab
+          (click)="view(row)"
+          [color]="MatColor.transparent"
+          class="mat-elevation-z0">
+          <app-icon name="chevron-right"
+            [color]="MatColor.primary"></app-icon>
+        </a>
+
+      </mat-cell>
+
+    </ng-component>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef
+        class="col-2 justify-content-end"> </mat-header-cell>
+
+      <mat-cell *matCellDef="let row"
+        class="col-2 justify-content-end">
+        <app-pie-graph [data]="row?.chart"
+          size="small"></app-pie-graph>
+
+        <a mat-mini-fab
+          (click)="view(row)"
+          [color]="MatColor.transparent"
+          class="mat-elevation-z0">
+          <app-icon name="chevron-right"
+            [color]="MatColor.primary"></app-icon>
+        </a>
+      </mat-cell>
+
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: visibleColumns;"></mat-row>
+  </table>
+</div>
+
+
+<ng-template #empty>
+  <div class="alert alert-warn">
+    <label class="mat-body-2 alert-text">No Foods found</label>
+  </div>
+</ng-template>

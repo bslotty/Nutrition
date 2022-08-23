@@ -1,0 +1,97 @@
+<app-section-header title="Meal List"
+    [buttons]="headerButtons"
+    (event)="headerEvent($event)"></app-section-header>
+
+
+<form [formGroup]="rangeForm">
+    <div class="row justify-content-center align-items-center">
+        <div class="col">
+            <app-form-field [field]="controls[0]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[1]"></app-form-field>
+        </div>
+    </div>
+</form>
+
+
+<div *ngIf="ready.value; else loader">
+
+
+    <div class="mb-5">
+        <div *ngIf="calorieChart?.length > 1"
+            class="row"
+            #calorieChartContainer>
+            <app-line-graph [data]="calorieChart"
+                parentName="calorieChartContainer"></app-line-graph>
+        </div>
+
+
+        <div *ngIf="macrosChart?.length > 1"
+            class="row"
+            #macrosChartContainer>
+            <app-line-graph [data]="macrosChart"
+                size="medium"
+                parentName="macrosChartContainer"></app-line-graph>
+        </div>
+
+
+    </div>
+
+
+    <div *ngFor="let int of intakes;"
+        class="mb-2">
+        <div class="row justify-content-center align-items-center">
+            <app-intake-table-totals [intake]="int"></app-intake-table-totals>
+        </div>
+
+
+        <div *ngIf="int.meals.length > 0; else emptyMeals"
+            class="mb-5">
+            <div *ngFor="let meal of int.meals; index as mi">
+                <div class="row justify-content-center align-items-center {{ mi != 0 ? 'mt-4' : '' }}">
+                    <div class="col-auto">
+                        <a mat-mini-fab
+                            [color]="MatColor.transparent"
+                            class="mat-elevation-z0"
+                            (click)="viewMeal(meal)">
+                            <app-icon name="link-2"
+                                [color]="MatColor.primary"></app-icon>
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <label class="mat-body-1">{{meal.name}}</label>
+                    </div>
+                </div>
+
+                <app-meal-part-table [parts]="meal.parts"></app-meal-part-table>
+
+                <app-meal-table-totals [parts]="meal.parts"
+                    *ngIf="meal.parts.length > 1"></app-meal-table-totals>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<ng-template #emptyMeals>
+    <div class="alert alert-primary">
+        <label class="mat-body-2 alert-text">No Meal Data</label>
+    </div>
+</ng-template>
+
+
+
+
+
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

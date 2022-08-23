@@ -1,0 +1,14 @@
+<div *ngIf="meal.parts.length > 0; else empty">
+    <div *ngFor="let part of meal.parts">
+        <app-meal-part-list-item [part]="part"
+            (event)="partListEvent($event)"></app-meal-part-list-item>
+    </div>
+</div>
+
+
+
+<ng-template #empty>
+    <div class="alert alert-warn">
+        <label class="mat-body-2 alert-text">No parts found</label>
+    </div>
+</ng-template>

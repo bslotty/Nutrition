@@ -1,0 +1,151 @@
+<div class="d-flex">
+
+    <table mat-table
+        matSort
+        [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col d-flex flex-grow-1">
+                <label class=" mat-body-2">Name</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col">
+                <div class="d-flex flex-column justify-content-start align-items-start">
+                    <label class="subText mat-caption">{{ row.food.brand }}</label>
+                    <label class="mat-body-1">{{ row.food.name }}</label>
+                </div>
+            </mat-cell>
+
+        </ng-container>
+
+        <ng-container matColumnDef="protein">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-1 d-none d-lg-flex">
+                <label class="protein mat-body-2">P</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="protein mat-body-1 text-small ">
+                    {{ (row.food.protein * ( row.amount / row.food.servingSize)).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="fat">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="fat col-1 d-none d-lg-flex">
+                <label class="fat mat-body-2">F</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="fat mat-body-1 text-small ">
+                    {{ (row.food.fat * ( row.amount / row.food.servingSize )).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="carbs">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="carbs col-1 d-none d-lg-flex">
+                <label class="carbs mat-body-2">C</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="carbs mat-body-1 text-small ">
+                    {{ (row.food.carbs * ( row.amount / row.food.servingSize )).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="sodium">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-1 d-none d-lg-flex">
+                <label class="sodium mat-body-2">So</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="sodium mat-body-1 text-small ">
+                    {{ (row.food.sodium * ( row.amount / row.food.servingSize )).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="fiber">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-1 d-none d-lg-flex">
+                <label class="fiber mat-body-2">Fi</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="fiber mat-body-1 text-small ">
+                    {{ (row.food.fiber * ( row.amount / row.food.servingSize )).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+        <ng-container matColumnDef="sugar">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-1 d-none d-lg-flex">
+                <label class="sugar mat-body-2">Su</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="sugar mat-body-1 text-small ">
+                    {{ (row.food.sugar * ( row.amount / row.food.servingSize )).toFixed(1) }}
+                </label>
+            </mat-cell>
+
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="calories">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-2 col-lg-1">
+                <label class=" mat-body-2">Cals</label>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-2 col-lg-1 mat-headline calories text-small ">
+                {{ (row.food.calories * ( row.amount / row.food.servingSize )).toFixed(1) }}
+            </mat-cell>
+        </ng-container>
+
+
+        <!-- <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: visibleColumns;"></mat-row>
+    </table>
+</div>
+
+
+
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

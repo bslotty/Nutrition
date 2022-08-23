@@ -1,0 +1,97 @@
+<div class="d-flex">
+
+    <table mat-table
+        matSort
+        [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+            <mat-cell *matCellDef="let row"
+                class="col">
+                <label class="mat-body-1">Meal Totals</label>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="protein">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="protein mat-body-1">
+                    {{ row.protein.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="fat">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="fat mat-body-1">
+                    {{ row.fat.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="carbs">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="carbs mat-body-1">
+                    {{ row.carbs.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="sodium">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="sodium mat-body-1">
+                    {{ row.sodium.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="fiber">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="fiber mat-body-1">
+                    {{ row.fiber.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="sugar">
+            <mat-cell *matCellDef="let row"
+                class="col-1 d-none d-lg-flex">
+                <label class="sugar mat-body-1">
+                    {{ row.sugar.toFixed(1) }}
+                </label>
+            </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="calories">
+            <mat-cell *matCellDef="let row"
+                class="col-2 col-lg-1">
+                <label class="mat-body-1">
+                    {{ row.calories.toFixed(1) }}
+                </label>
+                
+            </mat-cell>
+        </ng-container>
+
+
+        <!-- <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: visibleColumns;" class="table-total-row"></mat-row>
+        <!-- <mat-footer-row *matFooterRowDef="visibleColumns"></mat-footer-row> -->
+    </table>
+</div>
+
+
+
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>

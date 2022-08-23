@@ -1,0 +1,15 @@
+<div class="row justify-content-center align-items-center {{ orientation }}">
+  <div class="col" (window:resize)="onResize($event)">
+    <google-chart #chart
+      [title]="title"
+      [type]="type"
+      [data]="chartData"
+      [columns]="columnNames"
+      [options]="options"
+      [dynamicResize]="true"
+      [width]="width"
+      [height]="height">
+    </google-chart>
+  </div>
+
+</div>

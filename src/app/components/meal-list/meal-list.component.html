@@ -1,0 +1,37 @@
+<div *ngFor="let m of meals;">
+  <div class="row justify-content-start align-items-center">
+    <div class="col-auto">
+      <a mat-mini-fab [color]="MatColor.transparent" (click)="viewMeal(m)" class="mat-elevation-z0">
+        <app-icon name="link-2" [color]="MatColor.primary"></app-icon>
+      </a>
+
+    </div>
+
+    <!-- <div class="col-3 me-3">
+          <label class="mat-body-1">{{ m.name }}</label>
+          
+      </div>
+
+      <div class="col-auto">
+        <label class="mat-caption">{{ m.date | date:"h:mm" }}</label>
+      </div> -->
+
+      <div class=" col d-flex flex-column">
+        <!-- <label class="mat-caption">{{ m.date | date:"MMM d y h:mm" }}</label> -->
+        <label class="mat-body-1">{{ m.name }}</label>
+      </div>
+  </div>
+
+
+  <div *ngFor="let part of m.parts">
+    <app-meal-part-list-item [part]="part"></app-meal-part-list-item>
+  </div>
+
+
+</div>
+
+<ng-template #empty>
+  <div class="alert alert-warn">
+    <label class="mat-body-2 alert-text">No Meals found</label>
+  </div>
+</ng-template>

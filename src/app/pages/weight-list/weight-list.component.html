@@ -1,0 +1,116 @@
+<app-section-header title="Weight List"
+    [buttons]="headerButtons"
+    (event)="headerEvent($event)"></app-section-header>
+
+
+<form [formGroup]="rangeForm">
+    <div class="row justify-content-center align-items-center">
+        <div class="col">
+            <app-form-field [field]="controls[0]"></app-form-field>
+        </div>
+        <div class="col">
+            <app-form-field [field]="controls[1]"></app-form-field>
+        </div>
+    </div>
+</form>
+
+
+
+<div *ngIf="chart?.length > 0">
+    <app-line-graph [data]="chart"
+        size="medium"></app-line-graph>
+</div>
+
+
+
+
+
+<div *ngIf="dataSource.data.length > 0; else empty">
+
+    <table mat-table
+        matSort
+        [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-xs"> </mat-header-cell>
+            <mat-cell *matCellDef="let row"
+                class="col-xs">
+                <a mat-icon-button
+                    color="primary"
+                    routerLink="/life/weight/{{ row.id }}">
+                    <span class="icon-link-2"></span>
+                </a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-8"> Date </mat-header-cell>
+            <mat-cell *matCellDef="let row"
+                class="mat-headline col-8">
+                {{ row.date | date:'longDate' }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef
+                mat-sort-header
+                class="col-xs"> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let row"
+                class="mat-headline col-xs">
+                {{ row.pounds }}
+            </mat-cell>
+        </ng-container>
+
+
+
+        <ng-component matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-auto">
+                <a mat-mini-fab
+                    (click)="delete(row)"
+                    [color]="MatColor.transparent"
+                    class="mat-elevation-z0">
+                    <app-icon name="x"
+                        [color]="MatColor.warn"></app-icon>
+                </a>
+
+            </mat-cell>
+
+        </ng-component>
+
+
+        <ng-component matColumnDef="view">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+            <mat-cell *matCellDef="let row"
+                class="col-auto">
+                <a mat-mini-fab
+                    (click)="view(row)"
+                    [color]="MatColor.transparent"
+                    class="mat-elevation-z0">
+                    <app-icon name="chevron-right"
+                        [color]="MatColor.primary"></app-icon>
+                </a>
+
+            </mat-cell>
+
+        </ng-component>
+
+
+        <mat-header-row *matHeaderRowDef="visibleColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: visibleColumns;"></mat-row>
+    </table>
+</div>
+
+
+<ng-template #empty>
+    <div class="alert alert-warn">
+        <label class="mat-body-2 alert-text">No Data</label>
+    </div>
+</ng-template>

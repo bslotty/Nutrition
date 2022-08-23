@@ -1,0 +1,80 @@
+<div class="d-flex align-items-center">
+    <div class="col">
+        <label class="mat-subheading-1">Select Food</label>
+    </div>
+
+    <div class="col-auto">
+        <a mat-icon-button
+            [color]="MatColor.transparent"
+            (click)="close()">
+            <app-icon name="x"
+                [color]="MatColor.dark"></app-icon>
+        </a>
+    </div>
+</div>
+
+<hr>
+
+
+<div class="d-flex flex-column align-items-start mt-3">
+    <div>
+        <label class="mat-caption">Search</label>
+    </div>
+    <div class="col-12">
+        <form [formGroup]="form">
+            <app-form-field [field]="formField"></app-form-field>
+        </form>
+    </div>
+</div>
+
+
+
+
+<div class="mt-3">
+    <label class="mat-caption">Results</label>
+</div>
+<div *ngIf="shownFoods.length > 0; else empty">
+    <div *ngFor="let food of shownFoods"
+        class="d-flex align-items-center mb-2">
+        <div class="col p-0">
+            <!-- <app-account-card [account]="account"></app-account-card> -->
+            <label class="mat-body-1">{{ food.name }}</label>
+        </div>
+
+        <div class="col-auto">
+            <a mat-mini-fab
+                [color]="MatColor.transparent"
+                (click)="selectFood(food)"
+                class="mat-elevation-z0">
+                <app-icon name="chevron-right"
+                    [color]="MatColor.primary"></app-icon>
+            </a>
+        </div>
+
+    </div>
+
+    <div *ngIf="excluded != undefined"
+        class="alert alert-light mb-0">
+        <div class="alert-text">
+            <label class="mat-caption">{{ excluded }} more options not shown. Try Filtering</label>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #empty>
+    <div class="alert alert-danger mb-0">
+        <div class="alert-text">
+            <label class="mat-caption">Nothing found</label>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #loading>
+    <div class="alert alert-primary mb-0">
+        <div class="alert-primary">
+            <label class="mat-caption">Loading...</label>
+        </div>
+    </div>
+</ng-template>

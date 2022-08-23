@@ -1,0 +1,37 @@
+<div class="d-flex align-items-center">
+    <div class="col">
+        <label class="mat-subheading-1">Weight Entry</label>
+    </div>
+
+    <div class="col-auto">
+        <a mat-mini-fab
+            [color]="MatColor[MatColor.accent]"
+            (click)="save()"
+            class="mat-elevation-z0">
+            
+            <app-icon name="save"
+                [color]="MatColor.light"></app-icon>
+        </a>
+    </div>
+
+    <div class="col-auto ms-3">
+        <a mat-icon-button
+            [color]="MatColor.transparent"
+            (click)="close()">
+            <app-icon name="x"
+                [color]="MatColor.dark"></app-icon>
+        </a>
+    </div>
+</div>
+
+<hr>
+
+
+<div class="d-flex flex-column align-items-start mt-3">
+    <div class="col-12">
+        <form [formGroup]="form">
+            <app-form-field [field]="formField[0]"></app-form-field>
+            <app-form-field [field]="formField[1]"></app-form-field>
+        </form>
+    </div>
+</div>

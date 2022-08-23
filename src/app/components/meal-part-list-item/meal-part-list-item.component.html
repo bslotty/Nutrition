@@ -1,0 +1,36 @@
+<div *ngIf="food | async as f"
+    class="d-flex justify-content-start align-items-center mb-2">
+    <div class="col">
+        <label class="mat-body-1">{{ f.name }}</label>
+    </div>
+
+
+
+    <div class="col-auto">
+        <mat-form-field *ngIf="controls[0]"
+            appearance="fill">
+            <mat-label>
+                <label class="mat-body-2">{{ controls[0].label }}</label>
+            </mat-label>
+
+            <input matInput
+                [formControl]="controls[0].control" />
+
+            <div class="suffix-fix">
+                <label class="mat-body-1">{{ f.servingSizeMeasurementType }}</label>
+            </div>
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="col-auto ms-3">
+        <a mat-mini-fab
+            [color]="MatColor.transparent"
+            (click)="listEvent('remove')"
+            class="mat-elevation-z0">
+            <app-icon name="x"
+                [color]="MatColor.warn"></app-icon>
+        </a>
+    </div>
+</div>
